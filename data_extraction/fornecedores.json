@@ -1,0 +1,38 @@
+[
+  {
+    "CNPJ": "25.952.750/0001-94",
+    "Razao_Social": "VedoEnterprise",
+    "Cidade": "Osasco",
+    "UF": "SP",
+    "Email": "vedolinproducoes@gmail.com",
+    "Classe": "CEREAIS EM GRAOS E FARINHAS EM GERAL",
+    "Produto": "Arroz"
+  },
+  {
+    "CNPJ": "74.555.639/0001-70",
+    "Razao_Social": "IvanEnterprise",
+    "Cidade": "Sao Paulo",
+    "UF": "SP",
+    "Email": "ivanildojunior1995@gmail.com",
+    "Classe": "EQUIPAMENTOS DE PROJECAO",
+    "Produto": "Projetor"
+  },
+  {
+    "CNPJ": "66.771.485/0001-25",
+    "Razao_Social": "HenriqueEnterprise",
+    "Cidade": "Francisco Morato",
+    "UF": "SP",
+    "Email": "henriquesamchou@gmail.com",
+    "Classe": "MOBILIARIOS DE ESCRITORIO",
+    "Produto": "Cadeira"
+  },
+  {
+    "CNPJ": "24.477.065/0001-90",
+    "Razao_Social": "LeandroEnterprise",
+    "Cidade": "Sao Paulo",
+    "UF": "SP",
+    "Email": "leandroceccato@gmail.com",
+    "Classe": "ARTIGOS PARA ESCRITORIOS",
+    "Produto": "Caneta"
+  }
+]

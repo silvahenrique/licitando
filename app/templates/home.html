@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+        #head {
+            background-color: #168128;
+            margin: 0px 0px;
+            width: 100%;
+            padding: 0;
+            color: #ffffff;
+        }
+        #h-ctn {
+            width: 80%;
+            margin: 0 auto;
+            padding: 10px;
+
+        }
+        #head h1 {
+            font-size: 34px;
+        }
+
+        #head h2 {
+            font-size: 18px;
+        }
+        #container-2 {
+            width: 80%;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        .espaco {
+            padding: 5px;
+
+        }
+        #footer-bb {
+            width: 80%;
+            margin: 0 auto;
+            padding: 10px;
+            font-size: 16px !important;
+        }
+        #footer-bbi {
+            width: 100%;
+            padding: 2px;
+            background-color: #E9E9E9;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+
+    <div id="head">
+        <div id="h-ctn">
+            <h1>Licitando</h1>
+            <h2>Participe. Venda. Ajude.</h2>
+        </div>
+    </div>
+
+    <div id="container-2">
+
+        <section class="espaco">
+
+            <br><br>
+
+            <p>
+                <strong>Vamos criar um Brasil diferente?</strong><br>
+                Sua empresa pode fazer parte disso, participando de licitações (É GRÁTIS!). Aqui você vai conhecer como ofertar seus produtos, além de saber as oportunidades disponíveis.
+            </p>
+            <br>
+            <p>
+                <strong>Como você pode vender para o setor público?</strong><br>
+                Em uma espécie de “leilão ao contrário”, onde o menor preço ganha. Chamamos isso de pregão eletrônico.
+            </p>
+            <br>
+            <br>
+            <p>Saiba o que está a venda! Pesquise o produto que você vende:</p>
+
+        </section>
+
+        <section>
+        <form action="#" id="form-search">
+            <div class="row">
+  <div class="col-lg-12">
+    <div class="input-group">
+        <input type="text" class="form-control" id="q" placeholder="Campo de busca">
+      <span class="input-group-btn">
+        <button id="btn-q" type="button" class="btn btn-primary">Mostre os resultados</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+
+        </form>
+
+    </section>
+        <hr>
+
+    <div id="show">
+        <div class="panel panel-default">
+        <div class="panel-body">
+            <p>OC: <span id="oc"></span></p>
+            <p>UF: <span id="uf"></span></p>
+            <p>Municipio: <span id="municipio"></span></p>
+            <p>Unidade Compradora: <span id="unidade_compradora"></span></p>
+            <p>Modalidade: <span id="modalidade"></span></p>
+        </div>
+    </div>
+
+        <div class="table-responsive">
+            <table id="itens-data" class="table bordered" style="border: 1px solid #cccccc; padding: 10px;">
+
+            </table>
+        </div>
+    </div>
+
+    </div>
+    <div id="footer-bbi">
+        <div id="footer-bb">
+        <p><br><br>
+                Para participar do pregão, um cadastro rápido no sistema público é necessário. O link está <a href="https://www.bec.sp.gov.br/bec_acesso_ui/login/ui_login.aspx?TipoEmpresa=1&Idioma=pt-BR">aqui</a>
+                <br>
+                Basta clicar em Cadastrar Novo Usuário" e preencher os dados de pessoa física. Após clicar em Salvar, entre no sistema com CPF e senha cadastrados na etapa anterior.
+                <br>
+            Não se preocupe, nós vamos te avisar quando surgir uma nova oportunidade. Basta informar seu e-mail e ramo de negócio <a href="#form-search">aqui</a>.
+            <br><br>
+            </p>
+    </div>
+    </div>
+
+</div>
+
+
+<script>
+
+    (function () {
+
+        $('#show').hide();
+
+        var q = window.location.href.split("?");
+        if(q.length === 2)
+            q = q[1].split("=")[1];
+        else
+            return;
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://2414abd3.ngrok.io/search?q=" + q,
+            "method": "GET"
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(JSON.parse(response));
+
+            var cos = JSON.parse(response);
+            var co = cos['queryguy@the00mock.com'];
+            var oc_codigo = co['oc'];
+            var uf = co['uf'];
+            var municipio = co['municipio'];
+            var unidade_compradora = co['unidade_compradora'];
+            var modalidade = co['modalidade'];
+            var itens = co['itens'];
+
+            $('#oc').text(oc_codigo);
+            $('#uf').text(uf);
+            $('#municipio').text(municipio);
+            $('#unidade_compradora').text(unidade_compradora);
+            $('#modalidade').text(modalidade);
+
+            var table = $('#itens-data');
+            var content = "<tr style='padding: 5px; border: 1px solid #cccccc'>" +
+                // "                <th>Classe</th>" +
+                "                <th style=\"center; border: 1px solid #cccccc\">Item</th>" +
+                "                <th style=\"center; border: 1px solid #cccccc\">Desc. Classe</th>" +
+                "                <th style=\"center; border: 1px solid #cccccc\">Desc. Item</th>" +
+                // "                <th>Seq.</th>" +
+                "                <th style=\"center; border: 1px solid #cccccc\">Qtd.</th>" +
+                "                <th style=\"center; border: 1px solid #cccccc\">UNIDADE_FORNECIMENTO</th><h4>Itens: </h4>" +
+                "</tr>";
+
+            for (var i = 0; i < itens.length; i++) {
+
+                content += '<tr style=\'padding: 5px; text-align: center; border: 1px solid #cccccc\'\'>';
+                // content += '<td>' + itens[i]['CD_CLASSE_ITEM'] + '</td>';
+                content += '<td style="center; border: 1px solid #cccccc">' + itens[i]['CD_ITEM'] + '</td>';
+                content += '<td style="center; border: 1px solid #cccccc">' + itens[i]['DESCRICAO_CLASSE'] + '</td>';
+                content += '<td style="center; border: 1px solid #cccccc">' + itens[i]['DESCRICAO_ITEM'] + '</td>';
+
+                // content += '<td>' + itens[i]['NR_SEQUENCIA_ITEM'] + '</td>';
+                content += '<td style="center; border: 1px solid #cccccc">' + itens[i]['QUANTIDADE'] + '</td>';
+                content += '<td style="center; border: 1px solid #cccccc">' + itens[i]['UNIDADE_FORNECIMENTO'] + '</td>';
+                content += '</tr>';
+
+            }
+            table.html(content);
+            $('#show').show();
+
+        });
+
+    })();
+
+
+    $('#btn-q').click(function () {
+        $('#show').hide();
+
+        var q = $('#q').val();
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://2414abd3.ngrok.io/search?q=" + q,
+            "method": "GET"
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(JSON.parse(response));
+
+            var cos = JSON.parse(response);
+            var co = cos['queryguy@the00mock.com'];
+            var oc_codigo = co['oc'];
+            var uf = co['uf'];
+            var municipio = co['municipio'];
+            var unidade_compradora = co['unidade_compradora'];
+            var modalidade = co['modalidade'];
+            var itens = co['itens'];
+
+            $('#oc').text(oc_codigo);
+            $('#uf').text(uf);
+            $('#municipio').text(municipio);
+            $('#unidade_compradora').text(unidade_compradora);
+            $('#modalidade').text(modalidade);
+
+            var table = $('#itens-data');
+            var content = "<tr style='padding: 5px; border: 1px solid #cccccc'>" +
+                // "                <th>Classe</th>" +
+                "                <th style=\"center; border: 1px solid #cccccc\">Item</th>" +
+                "                <th style=\"center; border: 1px solid #cccccc\">Desc. Classe</th>" +
+                "                <th style=\"center; border: 1px solid #cccccc\">Desc. Item</th>" +
+                // "                <th>Seq.</th>" +
+                "                <th style=\"center; border: 1px solid #cccccc\">Qtd.</th>" +
+                "                <th style=\"center; border: 1px solid #cccccc\">UNIDADE_FORNECIMENTO</th><h4>Itens: </h4>" +
+                "</tr>";
+
+            for (var i = 0; i < itens.length; i++) {
+
+                content += '<tr style=\'padding: 5px; text-align: center; border: 1px solid #cccccc\'\'>';
+                // content += '<td>' + itens[i]['CD_CLASSE_ITEM'] + '</td>';
+                content += '<td style="center; border: 1px solid #cccccc">' + itens[i]['CD_ITEM'] + '</td>';
+                content += '<td style="center; border: 1px solid #cccccc">' + itens[i]['DESCRICAO_CLASSE'] + '</td>';
+                content += '<td style="center; border: 1px solid #cccccc">' + itens[i]['DESCRICAO_ITEM'] + '</td>';
+
+                // content += '<td>' + itens[i]['NR_SEQUENCIA_ITEM'] + '</td>';
+                content += '<td style="center; border: 1px solid #cccccc">' + itens[i]['QUANTIDADE'] + '</td>';
+                content += '<td style="center; border: 1px solid #cccccc">' + itens[i]['UNIDADE_FORNECIMENTO'] + '</td>';
+                content += '</tr>';
+
+            }
+            table.html(content);
+            $('#show').show();
+
+        });
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="container">
+
+    {% for key, value in data.items(): %}
+        <li>
+            {% if 'itens' ==  key: %}
+                {% for key in value['itens']: %}
+                    {{ key }}: {{ value }}
+                {% endfor %}
+            {% else: %}}
+                {{ key }}: {{ value }}
+            {% endif %}
+        </li>
+
+    {% endfor %}
+
+</div>
+</body>
+</html>
